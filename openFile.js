@@ -16,7 +16,7 @@ fs.readFile("county.csv", "utf8", (error, textContent) => {
       if(rowItems[0].length < 5) {
         rowItems[0] = '0' + rowItems[0]
       }
-      listOfFIPS[rowItems[0]] = rowItems[6]
+      listOfFIPS[rowItems[0]] = rowItems[3]
       count++
     }
   })
@@ -32,16 +32,16 @@ fs.readFile("counties.svg", "utf8", (error, mapContent) => {
     let currentValue = listOfFIPS[currentCounty]
 
 
-    if (currentValue > 28) {
+    if (currentValue > 33.6) {
       console.log('<path fill="#CE1522" data-medicalDebtShare="' + currentValue + '"' + row.replace('\n', ''))
-    } else if(currentValue > 21) {
+    } /*else if(currentValue > 21) {
       console.log('<path fill="#FB8C68" data-medicalDebtShare="' + currentValue + '"' + row.replace('\n', ''))
     } else if(currentValue > 14) {
       console.log('<path fill="#E6E0C2" data-medicalDebtShare="' + currentValue + '"' + row.replace('\n', ''))
    }  else if(currentValue > 7) {
       console.log('<path fill="#68C2AF" data-medicalDebtShare="' + currentValue + '"' + row.replace('\n', ''))
-    } else {
-      console.log('<path fill="#49A082" data-medicalDebtShare="' + currentValue + '"' + row.replace('\n', ''))
+    } */else {
+      console.log('<path fill="#ddd" data-medicalDebtShare="' + currentValue + '"' + row.replace('\n', ''))
     }
   }
 })
