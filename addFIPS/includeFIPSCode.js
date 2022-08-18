@@ -104,21 +104,41 @@ fs.readFile("county.csv", "utf8", (error, textContent) => {
       throw error;
     }
 
-    //console.log(listOfCounties)
-    console.log(Array.from(listOfCounties))
+    //console.log(listOfCounties);
 
     for (let row of textContent.split("\n")) {
       const rowItems = row.split(",");
 
-    console.log(rowItems);
-  
-    function getKeyByValue(object, value) {
-      return Object.keys(object).find((key) => object[key]['county'] == value);
-    }
-    let state = getKeyByValue(listOfCounties, rowItems[1])
-    console.log(state)
-    console.log(listOfCounties[state])
-    console.log('////////')
+      //console.log(rowItems);
+
+      function filterByValue(object, value) {
+       // console.log(value)
+
+       let tempObject = object
+       
+        Object.keys(object).forEach((key) => {
+         
+
+          if(tempObject[key]['state'] != value) {
+             console.log(rowItems[1])
+             console.log((tempObject[key]))
+             console.log(tempObject[key]['state'])
+             delete tempObject[key]
+          } 
+        });
+        return tempObject;
+      }
+
+      function getKeyByValue(object, value) {
+        return Object.keys(object).find(
+          (key) => object[key]["county"] == value
+        );
+      }
+      console.log('/////////////////////')
+      let filterStates = filterByValue(listOfCounties, rowItems[0]);
+      console.log(filterStates)
+      let state = getKeyByValue(listOfCounties, rowItems[1]);
+      console.log("////////////////////////");
     }
     //console.log(listOfCounties);
   });
